@@ -38,6 +38,7 @@ public class Schema {
     private Map<PropertyType, String> propertyToJavaTypeNullable;
     private boolean hasKeepSectionsByDefault;
     private boolean useActiveEntitiesByDefault;
+    private boolean useSessionEntitiesByDefault;
 
     public Schema(int version, String defaultJavaPackage) {
         this.version = version;
@@ -52,6 +53,10 @@ public class Schema {
 
     public void enableActiveEntitiesByDefault() {
         useActiveEntitiesByDefault = true;
+    }
+    
+    public void enableSessionEntitiesByDefault(){
+		useSessionEntitiesByDefault = true;
     }
 
     private void initTypeMappings() {
@@ -167,6 +172,10 @@ public class Schema {
     public boolean isUseActiveEntitiesByDefault() {
         return useActiveEntitiesByDefault;
     }
+    
+    public boolean isUseSessionEntitiesByDefault() {
+		return useSessionEntitiesByDefault;
+	}
 
     void init2ndPass() {
         if (defaultJavaPackageDao == null) {

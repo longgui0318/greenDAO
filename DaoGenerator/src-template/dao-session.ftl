@@ -53,13 +53,13 @@ public class DaoSession extends AbstractDaoSession {
     private final ${entity.classNameDao} ${entity.classNameDao?uncap_first};
 </#list>        
 
-    public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
+    public DaoSession(SQLiteDatabase db, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
 
 <#list schema.entities as entity>
         ${entity.classNameDao?uncap_first}Config = daoConfigMap.get(${entity.classNameDao}.class).clone();
-        ${entity.classNameDao?uncap_first}Config.initIdentityScope(type);
+        ${entity.classNameDao?uncap_first}Config.initIdentityScope(<#if entity.session>IdentityScopeType.Session<#else>IdentityScopeType.None</#if>);
 
 </#list>        
 <#list schema.entities as entity>
@@ -74,7 +74,9 @@ public class DaoSession extends AbstractDaoSession {
     
     public void clear() {
 <#list schema.entities as entity>
-        ${entity.classNameDao?uncap_first}Config.getIdentityScope().clear();
+		if (${entity.classNameDao?uncap_first}Config.getIdentityScope() != null) {
+			${entity.classNameDao?uncap_first}Config.getIdentityScope().clear();
+		}
 </#list>    
     }
 

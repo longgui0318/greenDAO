@@ -91,11 +91,11 @@ public class DaoMaster extends AbstractDaoMaster {
     }
     
     public DaoSession newSession() {
-        return new DaoSession(db, IdentityScopeType.Session, daoConfigMap);
+        return new DaoSession(db, daoConfigMap);
     }
     
+    /** fix it as wacai app */
     public DaoSession newSession(IdentityScopeType type) {
-        return new DaoSession(db, type, daoConfigMap);
+        return new DaoSession(db, daoConfigMap);
     }
-    
 }

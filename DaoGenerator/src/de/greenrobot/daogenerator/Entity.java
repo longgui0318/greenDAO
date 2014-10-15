@@ -67,6 +67,7 @@ public class Entity {
     private boolean skipTableCreation;
     private Boolean active;
     private Boolean hasKeepSections;
+    private Boolean session;
 
     Entity(Schema schema, String className) {
         this.schema = schema;
@@ -398,6 +399,10 @@ public class Entity {
     public Boolean getHasKeepSections() {
         return hasKeepSections;
     }
+    
+    public Boolean getSession() {
+		return session;
+	}
 
     public Collection<String> getAdditionalImportsEntity() {
         return additionalImportsEntity;
@@ -410,6 +415,10 @@ public class Entity {
     public void setHasKeepSections(Boolean hasKeepSections) {
         this.hasKeepSections = hasKeepSections;
     }
+    
+    public void setSession(Boolean session) {
+		this.session = session;
+	}
 
     public List<String> getInterfacesToImplement() {
         return interfacesToImplement;
@@ -487,6 +496,10 @@ public class Entity {
         if (hasKeepSections == null) {
             hasKeepSections = schema.isHasKeepSectionsByDefault();
         }
+        
+		if (session == null) {
+			session = schema.isUseSessionEntitiesByDefault();
+		}
 
         init2ndPassIndexNamesWithDefaults();
 
